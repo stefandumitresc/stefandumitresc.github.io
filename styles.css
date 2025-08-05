@@ -594,6 +594,7 @@ nav.scrolled {
   letter-spacing: -1px;
   position: relative;
   display: inline-block;
+  margin-top: 0; /* <-- Add this line */
 }
 
 .about-text h2::after {
