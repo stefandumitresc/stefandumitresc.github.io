@@ -552,7 +552,7 @@ nav.scrolled {
   display: grid;
   grid-template-columns: 1fr 2fr;
   gap: 4rem;
-  align-items: center;
+  align-items: start;
 }
 
 .profile-wrapper {
@@ -567,7 +567,6 @@ nav.scrolled {
   transition: all 0.4s ease;
   position: relative;
   z-index: 2;
-  top: -1000px;
 }
 
 .profile-img:hover {
