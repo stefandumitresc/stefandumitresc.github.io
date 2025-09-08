@@ -1,8 +1,8 @@
 /* ============================================
-   Stefan's Portfolio - Authentic Seattle Vibes
+   Stefan's Portfolio - Seattle Theme (Optimized)
    ============================================ */
 
-/* CSS Variables - Seattle Color Palette */
+/* CSS Variables */
 :root {
   --space-needle-gray: #4a5568;
   --pike-place-red: #c41230;
@@ -37,7 +37,7 @@ body {
 }
 
 /* ============================================
-   Navigation - Floating Glass Effect
+   Navigation Bar - Fixed Scrolling Issues
    ============================================ */
 nav {
   position: fixed;
@@ -46,19 +46,21 @@ nav {
   transform: translateX(-50%);
   width: 90%;
   max-width: 800px;
-  background: rgba(255, 255, 255, 0.85);
-  backdrop-filter: blur(20px);
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
   border-radius: 100px;
   z-index: 1000;
   padding: 0.8rem 2rem;
-  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  will-change: transform;
 }
 
 nav.scrolled {
   top: 10px;
   background: rgba(255, 255, 255, 0.95);
-  box-shadow: 0 8px 40px rgba(0, 0, 0, 0.12);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
 }
 
 .nav-container {
@@ -69,38 +71,15 @@ nav.scrolled {
 
 .nav-logo {
   color: var(--space-needle-gray);
-  font-size: 1.8rem;
+  font-size: 1.5rem;
   font-weight: 900;
   text-decoration: none;
   letter-spacing: -1px;
-  position: relative;
-}
-
-.nav-logo::after {
-  content: '🌲';
-  position: absolute;
-  right: -25px;
-  top: 50%;
-  transform: translateY(-50%);
-  font-size: 1rem;
-  animation: sway 3s ease-in-out infinite;
-}
-
-@keyframes sway {
-
-  0%,
-  100% {
-    transform: translateY(-50%) rotate(0deg);
-  }
-
-  50% {
-    transform: translateY(-50%) rotate(5deg);
-  }
 }
 
 .nav-links {
   display: flex;
-  gap: 2.5rem;
+  gap: 2rem;
   list-style: none;
 }
 
@@ -108,219 +87,88 @@ nav.scrolled {
   color: var(--space-needle-gray);
   text-decoration: none;
   font-weight: 500;
-  transition: all 0.3s ease;
+  transition: color 0.3s ease;
   position: relative;
   font-size: 0.95rem;
 }
 
-.nav-links a::before {
+.nav-links a::after {
   content: '';
   position: absolute;
-  bottom: -8px;
+  bottom: -5px;
   left: 0;
   width: 0;
-  height: 3px;
-  background: linear-gradient(90deg, var(--pike-place-red), var(--seattle-sunset));
+  height: 2px;
+  background: var(--pike-place-red);
   transition: width 0.3s ease;
-  border-radius: 3px;
 }
 
-.nav-links a:hover::before {
+.nav-links a:hover::after {
   width: 100%;
 }
 
 /* ============================================
-   Hero Section - Full Seattle Experience
+   Hero Section - With Real Seattle Skyline
    ============================================ */
 .hero {
   min-height: 100vh;
-  background: linear-gradient(180deg,
-      #87CEEB 0%,
-      #98D8E8 20%,
-      #B0C4DE 40%,
-      #778899 70%,
-      #4a5568 100%);
   position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
-  overflow: hidden;
+  background: linear-gradient(180deg,
+      rgba(135, 206, 235, 0.8) 0%,
+      rgba(176, 196, 222, 0.8) 40%,
+      rgba(119, 136, 153, 0.9) 70%,
+      rgba(47, 79, 79, 0.95) 100%);
 }
 
-/* Morning Mist Effect */
-.morning-mist {
+/* Seattle Skyline Background Image */
+.seattle-skyline-bg {
   position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
   height: 100%;
+  z-index: 1;
   opacity: 0.3;
-  background: url("data:image/svg+xml,%3Csvg width='100' height='100' xmlns='http://www.w3.org/2000/svg'%3E%3Cdefs%3E%3Cfilter id='fog'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.01' numOctaves='2' /%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0.3 0'/%3E%3C/filter%3E%3C/defs%3E%3Crect width='100' height='100' filter='url(%23fog)' /%3E%3C/svg%3E");
-  animation: drift 20s ease-in-out infinite;
+  background-image: url('seattle-skyline.jpg');
+  background-size: cover;
+  background-position: center bottom;
+  background-repeat: no-repeat;
 }
 
-@keyframes drift {
-
-  0%,
-  100% {
-    transform: translateX(0) translateY(0);
-  }
-
-  50% {
-    transform: translateX(30px) translateY(-20px);
-  }
-}
-
-/* Seattle Rain */
-.rain-effect {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-}
-
-.rain-effect::before {
+/* Fallback gradient if image doesn't load */
+.seattle-skyline-bg::after {
   content: '';
   position: absolute;
-  width: 100%;
-  height: 100%;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='100'%3E%3Cline x1='5' y1='0' x2='5' y2='10' stroke='rgba(255,255,255,0.2)' stroke-width='1'/%3E%3C/svg%3E");
-  animation: rainfall 0.3s linear infinite;
-  opacity: 0.3;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 400px;
+  background: linear-gradient(to top,
+      rgba(26, 32, 44, 0.9) 0%,
+      transparent 100%);
 }
 
-@keyframes rainfall {
+/* Simple rain effect (less performance intensive) */
+.rain-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0.1;
+  z-index: 2;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100'%3E%3Cline x1='50' y1='0' x2='50' y2='20' stroke='white' stroke-width='0.5' opacity='0.5'/%3E%3Cline x1='25' y1='20' x2='25' y2='40' stroke='white' stroke-width='0.5' opacity='0.5'/%3E%3Cline x1='75' y1='30' x2='75' y2='50' stroke='white' stroke-width='0.5' opacity='0.5'/%3E%3C/svg%3E");
+  animation: rain-fall 1s linear infinite;
+}
+
+@keyframes rain-fall {
   to {
     transform: translateY(100px);
   }
-}
-
-/* Seattle Skyline - Detailed */
-.seattle-skyline {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  width: 100%;
-  height: 500px;
-}
-
-/* Space Needle */
-.space-needle {
-  position: absolute;
-  bottom: 0;
-  left: 48%;
-  width: 80px;
-  height: 400px;
-  z-index: 5;
-}
-
-.space-needle::before {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 35px;
-  width: 10px;
-  height: 350px;
-  background: linear-gradient(to top, #2a2a2a, #4a4a4a);
-  clip-path: polygon(40% 100%, 60% 100%, 55% 20%, 45% 20%);
-}
-
-.space-needle::after {
-  content: '';
-  position: absolute;
-  bottom: 340px;
-  left: 15px;
-  width: 50px;
-  height: 30px;
-  background: #2a2a2a;
-  clip-path: polygon(20% 100%, 80% 100%, 100% 0%, 0% 0%);
-}
-
-/* Pike Place Market Sign */
-.pike-place-sign {
-  position: absolute;
-  bottom: 100px;
-  left: 10%;
-  z-index: 6;
-  transform: perspective(300px) rotateY(-15deg);
-}
-
-.pike-place-sign::before {
-  content: 'PUBLIC MARKET';
-  position: absolute;
-  font-family: 'Georgia', serif;
-  font-size: 1.2rem;
-  font-weight: bold;
-  color: white;
-  background: var(--pike-place-red);
-  padding: 8px 15px;
-  border: 3px solid white;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
-  white-space: nowrap;
-}
-
-.pike-place-sign::after {
-  content: 'CENTER';
-  position: absolute;
-  top: 35px;
-  left: 25px;
-  font-family: 'Georgia', serif;
-  font-size: 1rem;
-  color: white;
-  background: var(--pike-place-red);
-  padding: 5px 10px;
-  border: 2px solid white;
-}
-
-/* City Buildings */
-.city-buildings {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  width: 100%;
-  height: 300px;
-  background:
-    linear-gradient(to bottom, transparent 40%, #2a2a2a 40%, #2a2a2a 100%),
-    linear-gradient(to bottom, transparent 30%, #333 30%, #333 100%),
-    linear-gradient(to bottom, transparent 45%, #1a1a1a 45%, #1a1a1a 100%),
-    linear-gradient(to bottom, transparent 35%, #2d2d2d 35%, #2d2d2d 100%);
-  background-size:
-    15% 100%,
-    20% 100%,
-    18% 100%,
-    22% 100%;
-  background-position:
-    5% 0,
-    25% 0,
-    60% 0,
-    85% 0;
-  background-repeat: no-repeat;
-  opacity: 0.7;
-}
-
-/* Mount Rainier in Background */
-.mount-rainier {
-  position: absolute;
-  bottom: 200px;
-  right: 5%;
-  width: 0;
-  height: 0;
-  border-left: 150px solid transparent;
-  border-right: 150px solid transparent;
-  border-bottom: 200px solid rgba(255, 255, 255, 0.3);
-  z-index: 1;
-}
-
-.mount-rainier::after {
-  content: '';
-  position: absolute;
-  top: 60px;
-  left: -90px;
-  width: 0;
-  height: 0;
-  border-left: 90px solid transparent;
-  border-right: 90px solid transparent;
-  border-bottom: 140px solid rgba(255, 255, 255, 0.2);
 }
 
 /* Hero Content */
@@ -329,39 +177,23 @@ nav.scrolled {
   color: white;
   z-index: 10;
   padding: 2rem;
-  animation: dropIn 1s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-}
-
-@keyframes dropIn {
-  from {
-    opacity: 0;
-    transform: translateY(-50px);
-  }
-
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  position: relative;
 }
 
 .hero h1 {
-  font-size: 4rem;
+  font-size: 3.5rem;
   margin-bottom: 1rem;
-  text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.3);
+  text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
   font-weight: 900;
-  letter-spacing: -2px;
-  background: linear-gradient(135deg, #fff, #e0e0e0);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  letter-spacing: -1px;
 }
 
 .hero .tagline {
-  font-size: 1.6rem;
+  font-size: 1.4rem;
   margin-bottom: 0.5rem;
   color: #f0f0f0;
   font-weight: 300;
-  letter-spacing: 2px;
+  text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.5);
 }
 
 .hero .subtag {
@@ -373,10 +205,12 @@ nav.scrolled {
   align-items: center;
   justify-content: center;
   gap: 15px;
+  flex-wrap: wrap;
 }
 
 .hero .subtag span {
   position: relative;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
 }
 
 .hero .subtag span:not(:last-child)::after {
@@ -384,64 +218,6 @@ nav.scrolled {
   position: absolute;
   right: -12px;
   color: rgba(255, 255, 255, 0.5);
-}
-
-/* Coffee Steam Animation */
-.coffee-cup {
-  display: inline-block;
-  margin-left: 10px;
-  font-size: 1.5rem;
-  position: relative;
-}
-
-.coffee-cup::before {
-  content: '☕';
-  display: inline-block;
-  animation: wiggle 2s ease-in-out infinite;
-}
-
-.coffee-cup::after {
-  content: '';
-  position: absolute;
-  top: -10px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 20px;
-  height: 20px;
-  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Cpath d='M10 0 Q 5 5 10 10 T 10 20' fill='none' stroke='rgba(255,255,255,0.3)' stroke-width='2'/%3E%3C/svg%3E");
-  animation: steam 2s ease-in-out infinite;
-}
-
-@keyframes wiggle {
-
-  0%,
-  100% {
-    transform: rotate(0deg);
-  }
-
-  25% {
-    transform: rotate(-5deg);
-  }
-
-  75% {
-    transform: rotate(5deg);
-  }
-}
-
-@keyframes steam {
-  0% {
-    opacity: 0;
-    transform: translateX(-50%) translateY(0);
-  }
-
-  50% {
-    opacity: 1;
-  }
-
-  100% {
-    opacity: 0;
-    transform: translateX(-50%) translateY(-20px);
-  }
 }
 
 /* Buttons */
@@ -454,10 +230,10 @@ nav.scrolled {
 }
 
 .btn {
-  padding: 1rem 2.5rem;
+  padding: 0.9rem 2.2rem;
   text-decoration: none;
   border-radius: 50px;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
@@ -465,41 +241,21 @@ nav.scrolled {
   text-transform: uppercase;
   letter-spacing: 1px;
   font-size: 0.9rem;
-  position: relative;
-  overflow: hidden;
 }
 
 .btn-primary {
   background: linear-gradient(135deg, var(--pike-place-red), var(--seattle-sunset));
   color: white;
-  box-shadow: 0 4px 20px rgba(196, 18, 48, 0.3);
+  box-shadow: 0 4px 15px rgba(196, 18, 48, 0.3);
 }
 
 .btn-primary:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 8px 30px rgba(196, 18, 48, 0.4);
-}
-
-.btn-primary::before {
-  content: '';
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 0;
-  height: 0;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.3);
-  transform: translate(-50%, -50%);
-  transition: width 0.6s, height 0.6s;
-}
-
-.btn-primary:hover::before {
-  width: 300px;
-  height: 300px;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(196, 18, 48, 0.4);
 }
 
 .btn-secondary {
-  background: rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.15);
   color: white;
   border: 2px solid white;
   backdrop-filter: blur(10px);
@@ -508,39 +264,16 @@ nav.scrolled {
 .btn-secondary:hover {
   background: white;
   color: var(--puget-sound);
-  transform: translateY(-3px);
-  box-shadow: 0 8px 30px rgba(255, 255, 255, 0.3);
+  transform: translateY(-2px);
 }
 
 /* ============================================
-   About Section - More Personal
+   About Section
    ============================================ */
 .about {
-  padding: 6rem 2rem;
+  padding: 5rem 2rem;
   background: white;
   position: relative;
-}
-
-.about::before {
-  content: '{ }';
-  position: absolute;
-  top: 40px;
-  left: 40px;
-  font-size: 2rem;
-  color: var(--cyber-green);
-  opacity: 0.1;
-  font-family: 'Courier New', monospace;
-}
-
-.about::after {
-  content: '</>';
-  position: absolute;
-  bottom: 40px;
-  right: 40px;
-  font-size: 2rem;
-  color: var(--tech-purple);
-  opacity: 0.1;
-  font-family: 'Courier New', monospace;
 }
 
 .container {
@@ -551,12 +284,13 @@ nav.scrolled {
 .about-content {
   display: grid;
   grid-template-columns: 1fr 2fr;
-  gap: 4rem;
-  align-items: center;
+  gap: 3rem;
+  align-items: start;
 }
 
 .profile-wrapper {
-  position: relative;
+  position: sticky;
+  top: 100px;
 }
 
 .profile-img {
@@ -564,82 +298,30 @@ nav.scrolled {
   max-width: 320px;
   border-radius: 20px;
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
-  transition: all 0.4s ease;
-  position: relative;
-  z-index: 2;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .profile-img:hover {
-  transform: scale(1.05) rotate(2deg);
+  transform: scale(1.03);
   box-shadow: 0 25px 50px rgba(0, 0, 0, 0.2);
-}
-
-/* Decorative elements around photo */
-.profile-wrapper::before {
-  content: '';
-  position: absolute;
-  top: -20px;
-  left: -20px;
-  right: -20px;
-  bottom: -20px;
-  background: linear-gradient(135deg, var(--pike-place-red), var(--tech-purple), var(--cyber-green));
-  border-radius: 20px;
-  z-index: 1;
-  opacity: 0.3;
-  animation: gradient-shift 5s ease-in-out infinite;
-}
-
-@keyframes gradient-shift {
-
-  0%,
-  100% {
-    transform: rotate(0deg);
-  }
-
-  50% {
-    transform: rotate(3deg);
-  }
 }
 
 .about-text h2 {
   color: var(--space-needle-gray);
-  font-size: 2.8rem;
+  font-size: 2.5rem;
   margin-bottom: 1.5rem;
   font-weight: 900;
   letter-spacing: -1px;
-  position: relative;
-  display: inline-block;
-}
-
-.about-text h2::after {
-  content: '🚀';
-  position: absolute;
-  right: -40px;
-  top: 0;
-  font-size: 1.5rem;
-  animation: rocket 3s ease-in-out infinite;
-}
-
-@keyframes rocket {
-
-  0%,
-  100% {
-    transform: translateY(0) rotate(0deg);
-  }
-
-  50% {
-    transform: translateY(-10px) rotate(10deg);
-  }
 }
 
 .about-text p {
-  font-size: 1.15rem;
+  font-size: 1.1rem;
   margin-bottom: 1.5rem;
   color: #4a5568;
-  line-height: 1.9;
+  line-height: 1.8;
 }
 
-/* Interest Areas - New Design */
+/* Interest Areas */
 .interest-areas {
   margin-top: 2rem;
   padding: 1.5rem;
@@ -657,13 +339,9 @@ nav.scrolled {
   gap: 10px;
 }
 
-.interest-areas h3::before {
-  content: '💡';
-}
-
 .interest-grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   gap: 1rem;
   margin-top: 1rem;
 }
@@ -675,13 +353,12 @@ nav.scrolled {
   padding: 0.8rem;
   background: white;
   border-radius: 10px;
-  transition: all 0.3s ease;
-  cursor: default;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .interest-item:hover {
-  transform: translateX(5px);
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  transform: translateX(3px);
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
 }
 
 .interest-icon {
@@ -704,7 +381,7 @@ nav.scrolled {
   color: #718096;
 }
 
-/* Skills - Redesigned */
+/* Skills */
 .skills {
   display: flex;
   flex-wrap: wrap;
@@ -713,57 +390,75 @@ nav.scrolled {
 }
 
 .skill-tag {
-  padding: 0.6rem 1.2rem;
+  padding: 0.5rem 1rem;
   border-radius: 25px;
   font-size: 0.9rem;
   font-weight: 500;
-  transition: all 0.3s ease;
-  cursor: default;
-  position: relative;
-  overflow: hidden;
-}
-
-.skill-tag:nth-child(odd) {
+  transition: transform 0.2s ease;
   background: linear-gradient(135deg, var(--cloud-blue), var(--puget-sound));
   color: white;
 }
 
 .skill-tag:nth-child(even) {
   background: linear-gradient(135deg, var(--tech-purple), var(--pike-place-red));
-  color: white;
 }
 
 .skill-tag:hover {
-  transform: translateY(-3px) scale(1.05);
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+  transform: translateY(-2px);
 }
 
-/* ============================================
-   Projects Section - Creative Cards
-   ============================================ */
-.projects {
-  padding: 6rem 2rem;
-  background: linear-gradient(135deg, #f7fafc 0%, #ffffff 100%);
+/* Learning Section */
+.learning-section {
+  margin-top: 2rem;
+  padding: 1.5rem;
+  background: linear-gradient(135deg, #fef5e7, #fdebd0);
+  border-radius: 15px;
+  border-left: 4px solid var(--seattle-sunset);
+}
+
+.learning-section h3 {
+  color: var(--space-needle-gray);
+  font-size: 1.3rem;
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.learning-section ul {
+  list-style: none;
+  padding: 0;
+}
+
+.learning-section li {
+  margin-bottom: 0.8rem;
+  color: #4a5568;
+  padding-left: 1.5rem;
   position: relative;
 }
 
-.projects::before {
-  content: '';
+.learning-section li::before {
+  content: '→';
   position: absolute;
-  top: 0;
   left: 0;
-  right: 0;
-  height: 1px;
-  background: linear-gradient(90deg, transparent, var(--pike-place-red), transparent);
+  color: var(--seattle-sunset);
+  font-weight: bold;
+}
+
+/* ============================================
+   Projects Section
+   ============================================ */
+.projects {
+  padding: 5rem 2rem;
+  background: linear-gradient(135deg, #f7fafc 0%, #ffffff 100%);
 }
 
 .projects h2 {
   text-align: center;
   color: var(--space-needle-gray);
-  font-size: 2.8rem;
+  font-size: 2.5rem;
   margin-bottom: 1rem;
   font-weight: 900;
-  letter-spacing: -1px;
 }
 
 .projects-subtitle {
@@ -775,212 +470,137 @@ nav.scrolled {
 
 .project-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
-  gap: 2.5rem;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 2rem;
   margin-top: 3rem;
 }
 
 .project-card {
   background: white;
-  border-radius: 20px;
+  border-radius: 15px;
   overflow: hidden;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
-  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-  position: relative;
-  cursor: default;
-}
-
-.project-card::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 5px;
-  background: linear-gradient(90deg, var(--pike-place-red), var(--tech-purple), var(--cyber-green));
-  background-size: 200% 100%;
-  animation: gradient-slide 3s ease-in-out infinite;
-}
-
-@keyframes gradient-slide {
-  0% {
-    background-position: 0% 50%;
-  }
-
-  50% {
-    background-position: 100% 50%;
-  }
-
-  100% {
-    background-position: 0% 50%;
-  }
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  border-top: 4px solid var(--pike-place-red);
 }
 
 .project-card:hover {
-  transform: translateY(-10px) scale(1.02);
-  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
+  transform: translateY(-5px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
 }
 
 .project-header {
-  padding: 2rem;
+  padding: 1.5rem;
   background: linear-gradient(135deg, #2d3748, #1a202c);
   color: white;
-  position: relative;
 }
 
 .project-header h3 {
-  font-size: 1.8rem;
-  margin-bottom: 0.5rem;
+  font-size: 1.6rem;
+  margin-bottom: 0.3rem;
   font-weight: 700;
 }
 
 .project-type {
-  font-size: 0.95rem;
+  font-size: 0.9rem;
   opacity: 0.8;
   font-weight: 300;
-  letter-spacing: 1px;
-}
-
-.project-emoji {
-  position: absolute;
-  right: 2rem;
-  top: 50%;
-  transform: translateY(-50%);
-  font-size: 2.5rem;
-  opacity: 0.3;
 }
 
 .project-body {
-  padding: 2rem;
+  padding: 1.5rem;
 }
 
 .project-body p {
   color: #4a5568;
-  margin-bottom: 1.2rem;
-  line-height: 1.8;
+  margin-bottom: 1rem;
+  line-height: 1.7;
+  font-size: 0.95rem;
 }
 
 .tech-stack {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.6rem;
-  margin: 1.5rem 0;
+  gap: 0.5rem;
+  margin: 1rem 0;
 }
 
 .tech {
-  background: linear-gradient(135deg, #edf2f7, #e2e8f0);
+  background: #edf2f7;
   color: var(--space-needle-gray);
-  padding: 0.4rem 1rem;
-  border-radius: 20px;
+  padding: 0.3rem 0.8rem;
+  border-radius: 15px;
   font-size: 0.85rem;
-  font-weight: 600;
-  border: 1px solid transparent;
-  transition: all 0.3s ease;
-}
-
-.tech:hover {
-  border-color: var(--pike-place-red);
-  transform: translateY(-2px);
+  font-weight: 500;
 }
 
 .project-links {
   display: flex;
   gap: 1rem;
-  margin-top: 1.5rem;
+  margin-top: 1rem;
 }
 
 .project-link {
   color: var(--puget-sound);
   text-decoration: none;
   font-weight: 600;
-  display: flex;
+  display: inline-flex;
   align-items: center;
-  gap: 0.5rem;
-  transition: all 0.3s ease;
-  padding: 0.5rem 1rem;
-  border: 2px solid var(--puget-sound);
-  border-radius: 25px;
+  gap: 0.3rem;
+  transition: color 0.2s ease;
 }
 
 .project-link:hover {
-  background: var(--puget-sound);
-  color: white;
-  transform: translateX(5px);
+  color: var(--pike-place-red);
 }
 
 /* ============================================
-   Contact Section - Seattle Vibes
+   Contact Section
    ============================================ */
 .contact {
-  padding: 6rem 2rem;
+  padding: 5rem 2rem;
   background: linear-gradient(135deg, #1a202c, #2d3748);
   color: white;
   text-align: center;
-  position: relative;
-  overflow: hidden;
-}
-
-/* Seattle skyline bottom */
-.contact::after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  height: 100px;
-  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 100'%3E%3Cpath fill='%23000' fill-opacity='0.2' d='M0,50 C100,30 200,70 300,50 C400,30 500,60 600,45 C700,30 800,55 900,45 C1000,35 1100,60 1200,50 C1300,40 1400,50 1440,50 L1440,100 L0,100 Z'%3E%3C/path%3E%3C/svg%3E");
-  background-size: cover;
 }
 
 .contact h2 {
-  font-size: 2.8rem;
+  font-size: 2.5rem;
   margin-bottom: 1rem;
   font-weight: 900;
-  letter-spacing: -1px;
-  position: relative;
-  z-index: 1;
 }
 
 .contact p {
-  font-size: 1.2rem;
-  margin-bottom: 3rem;
+  font-size: 1.1rem;
+  margin-bottom: 2rem;
   opacity: 0.9;
-  position: relative;
-  z-index: 1;
 }
 
 .contact-links {
   display: flex;
   justify-content: center;
-  gap: 2rem;
+  gap: 1.5rem;
   flex-wrap: wrap;
-  position: relative;
-  z-index: 1;
 }
 
 .contact-link {
   color: white;
   text-decoration: none;
   font-size: 1rem;
-  display: flex;
+  display: inline-flex;
   align-items: center;
-  gap: 0.8rem;
-  transition: all 0.3s ease;
-  padding: 1rem 2rem;
+  gap: 0.5rem;
+  transition: transform 0.2s ease, background 0.2s ease;
+  padding: 0.8rem 1.8rem;
   border: 2px solid white;
   border-radius: 50px;
   background: rgba(255, 255, 255, 0.05);
-  backdrop-filter: blur(10px);
-  font-weight: 500;
-  text-transform: uppercase;
-  letter-spacing: 1px;
 }
 
 .contact-link:hover {
   background: white;
   color: var(--space-needle-gray);
-  transform: translateY(-5px) scale(1.05);
-  box-shadow: 0 10px 30px rgba(255, 255, 255, 0.3);
+  transform: translateY(-3px);
 }
 
 /* ============================================
@@ -991,7 +611,6 @@ footer {
   color: white;
   text-align: center;
   padding: 2rem;
-  position: relative;
 }
 
 footer p {
@@ -999,8 +618,8 @@ footer p {
   font-size: 0.95rem;
 }
 
-footer .seattle-love {
-  margin-top: 1rem;
+.seattle-love {
+  margin-top: 0.5rem;
   font-size: 0.9rem;
   opacity: 0.6;
 }
@@ -1011,43 +630,33 @@ footer .seattle-love {
 @media (max-width: 768px) {
   nav {
     width: 95%;
-    padding: 0.8rem 1.5rem;
+    padding: 0.6rem 1rem;
+    top: 10px;
   }
 
   .nav-links {
-    gap: 1.5rem;
-    font-size: 0.9rem;
+    gap: 1rem;
+    font-size: 0.85rem;
   }
 
   .hero h1 {
-    font-size: 2.8rem;
+    font-size: 2.5rem;
   }
 
   .hero .tagline {
-    font-size: 1.3rem;
+    font-size: 1.2rem;
   }
 
   .hero .subtag {
-    font-size: 1rem;
-    flex-direction: column;
-    gap: 5px;
-  }
-
-  .hero .subtag span::after {
-    display: none;
-  }
-
-  .pike-place-sign {
-    transform: scale(0.8);
-    left: 5%;
-  }
-
-  .space-needle {
-    transform: scale(0.8);
+    font-size: 0.95rem;
   }
 
   .about-content {
     grid-template-columns: 1fr;
+  }
+
+  .profile-wrapper {
+    position: static;
     text-align: center;
   }
 
@@ -1062,72 +671,42 @@ footer .seattle-love {
   .project-grid {
     grid-template-columns: 1fr;
   }
-
-  .contact-links {
-    flex-direction: column;
-    align-items: center;
-  }
 }
 
 @media (max-width: 480px) {
   .hero h1 {
-    font-size: 2.2rem;
-  }
-
-  .nav-container {
-    padding: 0 1rem;
-  }
-
-  .nav-logo::after {
-    display: none;
+    font-size: 2rem;
   }
 
   .hero-buttons {
     flex-direction: column;
     width: 100%;
-    padding: 0 2rem;
+    padding: 0 1rem;
   }
 
   .btn {
     width: 100%;
     justify-content: center;
   }
-
-  .mount-rainier {
-    display: none;
-  }
 }
 
-/* ============================================
-   Smooth scroll padding for fixed nav
-   ============================================ */
+/* Smooth scroll padding */
 section {
   scroll-margin-top: 100px;
 }
 
-/* ============================================
-   Custom Animations
-   ============================================ */
-@keyframes fadeIn {
-  from {
-    opacity: 0;
+/* Performance optimizations */
+* {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Reduce motion for accessibility */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
   }
-
-  to {
-    opacity: 1;
-  }
-}
-
-.fade-in {
-  animation: fadeIn 0.8s ease-in;
-}
-
-/* Loading state */
-.loading {
-  opacity: 0;
-  transition: opacity 0.3s ease;
-}
-
-.loaded {
-  opacity: 1;
 }
